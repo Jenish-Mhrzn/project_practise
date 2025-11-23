@@ -1,0 +1,133 @@
+// Write a C# program to add two digit using constructor.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab1
+{
+    internal class Q1
+    {
+        private int x, y;
+        public Q1(int a, int b)
+        {
+            this.x = a;
+            this.y = b;
+        }
+        public void show()
+        {
+            int sum = x + y;
+            Console.WriteLine("sum of x and y is:" + sum);
+        }
+        static void Main(string[] args)
+        {
+            Q1 q = new Q1(10, 20);
+            q.show();
+            Console.ReadKey();
+
+        }
+    }
+}
+
+// Calculate area of rectangle using multiple inheritance in C#.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Rectangle
+{
+    interface IShape
+    {
+        void SetDimensions(double length, double width);
+    }
+
+    interface IArea
+    {
+        double CalculateArea();
+    }
+
+    class Rectangle : IShape, IArea
+    {
+        private double length;
+        private double width;
+
+        public void SetDimensions(double length, double width)
+        {
+            this.length = length;
+            this.width = width;
+        }
+
+        public double CalculateArea()
+        {
+            return length * width;
+        }
+    }
+    internal class Q6
+    {
+        static void Main(string[] args)
+        {
+            Rectangle rect = new Rectangle();
+
+            Console.Write("Enter length of rectangle: ");
+            double length = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter width of rectangle: ");
+            double width = Convert.ToDouble(Console.ReadLine());
+
+            rect.SetDimensions(length, width);
+
+            double area = rect.CalculateArea();
+            Console.WriteLine("Area of rectangle: " + area);
+        }
+    }
+}
+
+// Write a C# program how virtual method are used in polymorphism.
+using System;
+
+class Animal
+{
+    // Virtual method
+    public virtual void Speak()
+    {
+        Console.WriteLine("The animal makes a sound.");
+    }
+}
+
+class Dog : Animal
+{
+    // Override virtual method
+    public override void Speak()
+    {
+        Console.WriteLine("The dog barks.");
+    }
+}
+
+class Cat : Animal
+{
+    // Override virtual method
+    public override void Speak()
+    {
+        Console.WriteLine("The cat meows.");
+    }
+}
+
+class lab2_Q7
+{
+    static void Main(string[] args)
+    {
+        // Base class reference to derived class objects
+        Animal a1 = new Animal();
+        Animal a2 = new Dog();
+        Animal a3 = new Cat();
+
+        // Polymorphism: calls correct overridden method
+        a1.Speak(); // Output: The animal makes a sound.
+        a2.Speak(); // Output: The dog barks.
+        a3.Speak(); // Output: The cat meows.
+    }
+}

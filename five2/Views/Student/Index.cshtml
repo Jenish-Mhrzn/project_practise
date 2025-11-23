@@ -1,0 +1,28 @@
+@model lab5Q2.Models.StudentModel
+
+<h2>Enter Student Information</h2>
+
+<form asp-action="ShowInfo" method="post">
+    <div>
+        <label>Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" style="color:red"></span>
+    </div>
+    <div>
+        <label>Course:</label>
+        <input asp-for="Course" />
+        <span asp-validation-for="Course" style="color:red"></span>
+    </div>
+    <div>
+        <label>Semester:</label>
+        <input asp-for="Semester" type="number" />
+        <span asp-validation-for="Semester" style="color:red"></span>
+    </div>
+    <button type="submit">Show Info</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

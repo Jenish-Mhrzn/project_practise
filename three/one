@@ -1,0 +1,107 @@
+// 1.      
+// Write a program in C# Sharp to find the numbers
+// of students who gets the marks greater than 80 using LINQ.
+using Lab.lab1;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab3
+{
+
+    class Student
+    {
+        public string Name { get; set; }
+        public int Marks { get; set; }
+    }
+    internal class Q1
+    {
+        static void Main()
+        {
+            List<Student> list = new List<Student>
+            {
+                new Student { Name = "Jenish", Marks = 90 },
+                new Student { Name = "Jeni", Marks = 82 },
+                new Student { Name = "Malik", Marks = 70 },
+                new Student { Name = "Bonzai", Marks = 50 },
+            };
+            var highscore = list.Where(s => s.Marks > 80);
+
+            int count = highscore.Count();
+
+            Console.WriteLine("Number of student greater than makrs 80 is:" + count);
+
+            Console.WriteLine("Students:");
+            foreach(var student in highscore)
+            {
+                Console.WriteLine($"{student.Name}- {student.Marks}");
+
+            }
+
+        }
+    }
+}
+
+
+// 2.      
+// Write a program to find the upper case letter in
+// string using LINQ.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Lab.lab3
+{
+    internal class Q2
+    {
+        static void Main()
+        {
+            List<string> words = new List<string>
+            {
+                "Hello", "JENISH", "Ok", "JEnish"
+            };
+
+            Console.WriteLine("Uppercase letters in each word:");
+            foreach (var word in words)
+            {
+                // Get only the uppercase characters from the word
+                string uppercaseOnly = new string(word.Where(char.IsUpper).ToArray());
+
+                // Only print if there's at least one uppercase letter
+                if (!string.IsNullOrEmpty(uppercaseOnly))
+                {
+                    Console.WriteLine(uppercaseOnly);
+                }
+            }
+        }
+    }
+}
+
+
+// 3.      
+// Write a program in C# Sharp to find the numbers
+// of an array and the square of each number using LINQ. Note: Result should be like “Square
+// of Number …. Is ……..”
+
+using System;
+using System.Linq;
+
+namespace Lab.lab3
+{
+    internal class Q3
+    {
+        static void Main()
+        {
+            int[] numbers = { 2, 4, 6, 8, 10 };
+
+            var squares = numbers.Select(n => new { Number = n, Square = n * n });
+
+            foreach (var item in squares)
+            {
+                Console.WriteLine($"Square of Number {item.Number} is {item.Square}");
+            }
+        }
+    }
+}

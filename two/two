@@ -1,0 +1,127 @@
+// Write a C# program to print 1 to 10 using collection and generic list.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab2
+{
+    internal class Q4
+    {
+        static void Main()
+        {
+            List<int> number = new List<int> ();
+
+            for(int i=0; i<=10; i++)
+            {
+                number.Add(i);
+            }
+
+            foreach(int num in number)
+            {
+                Console.WriteLine(num);
+            }
+        }
+    }
+}
+
+
+// 5. Write a C# program to print CustomerId and CustomerName using Dictionary.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab2
+{
+    internal class Q5
+    {
+        class Program
+        {
+            static void Main()
+            {
+                // Create a dictionary with CustomerId as key and CustomerName as value
+                Dictionary<int, string> customers = new Dictionary<int, string>();
+
+                // Add some sample customers
+                customers.Add(01, "Jenish");
+                customers.Add(02, "Malik");
+                customers.Add(03, "Jeni");
+
+                // Print header
+                Console.WriteLine("CustomerId\tCustomerName");
+
+                // Loop through dictionary and print each entry
+                foreach (KeyValuePair<int, string> customer in customers)
+                {
+                    Console.WriteLine("{0}\t\t{1}", customer.Key, customer.Value);
+                }
+
+                // Keep the console open
+                Console.ReadLine();
+            }
+        }
+    }
+}
+
+
+// Write a C# program that will read balance, withdraw amount from user, and display the
+// remaining balance on screen when balance is greater than withdraw amount otherwise throw
+// a user defined exception with appropriate message.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab2
+{
+    class InsufficientBalanceException : Exception
+    {
+        public InsufficientBalanceException(string message) : base(message)
+        {
+        }
+    }
+    internal class Q6
+    {
+            class Program
+            {
+                static void Main()
+                {
+                    double balance, withdrawAmount;
+
+                    Console.Write("Enter your account balance: ");
+                    balance = Convert.ToDouble(Console.ReadLine());
+
+                    Console.Write("Enter amount to withdraw: ");
+                    withdrawAmount = Convert.ToDouble(Console.ReadLine());
+
+                    try
+                    {
+                        if (withdrawAmount > balance)
+                        {
+                            // Throw custom exception
+                            throw new InsufficientBalanceException("Withdrawal amount exceeds available balance.");
+                        }
+
+                        double remaining = balance - withdrawAmount;
+                        Console.WriteLine("Transaction successful!");
+                        Console.WriteLine("Remaining Balance: Rs. " + remaining);
+                    }
+                    catch (InsufficientBalanceException ex)
+                    {
+                        Console.WriteLine("Transaction failed: " + ex.Message);
+                    }
+
+                    Console.ReadLine(); // Keep console window open
+                }
+            }
+    }
+    
+}

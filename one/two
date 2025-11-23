@@ -1,0 +1,233 @@
+// Write a C# program to display student Id and Name using automatic properties.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab1
+{
+    class student
+    {
+        public int Studentid;
+        public string Name;
+    }
+    internal class Q2
+    {
+        static void Main(string[] args)
+        {
+            student student = new student();
+            student.Studentid = 23081053;
+            student.Name = "Jenish Maharjan";
+            Console.WriteLine("Student Id: " + student.Studentid);
+            Console.WriteLine("Student Name: " + student.Name);
+        }
+
+    }
+}
+
+// Write a C# program to reverse element of an array.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab1
+{
+    internal class Q3
+    {
+        static void Main(string[] args)
+        {
+            int[] number = { 1, 2, 3, 4, 5, 6 };
+            Console.WriteLine("Original Array: ");
+            foreach (int i in number)
+            {
+                Console.Write(i + " ");
+            }
+            Array.Reverse(number);
+            Console.WriteLine("\nReversed Array: ");
+            foreach (int i in number)
+            {
+                Console.Write(i + " ");
+            }
+
+        }
+    }
+}
+
+// Write a C# program how Name of Students are stored and retrieved using indexer.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab.lab1
+{
+    class Students
+    {
+        private string[] studentsName = new string[5];
+        public string this[int index]
+        {
+            get { return studentsName[index]; }
+            set
+            {
+                studentsName[index] = value;
+            }
+        }
+    }
+
+    internal class Q4
+    {
+        static void Main(string[] args)
+        {
+            Students students = new Students();
+            students[0] = "abc";
+            students[1] = "qwe";
+            students[2] = "pqr";
+            students[3] = "stv";
+            students[4] = "wxy";
+            Console.WriteLine("List of the studnets: ");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("Student" + (i + 1) + ": " + students[i]);
+            }
+        }
+
+    }
+}
+
+
+// Write a C# program for showing single, multiple, multilevel and hierarchical inheritance.
+
+using System;
+
+namespace Lab.lab1 {
+
+// 1. Single Inheritance
+    class Animal
+    {
+        public void Eat()
+        {
+            Console.WriteLine("Animal is eating...");
+        }
+    }
+
+    class Dog : Animal
+    {
+        public void Bark()
+        {
+            Console.WriteLine("Dog is barking...");
+        }
+    }
+
+    // 2. Multiple Inheritance using Interfaces
+    interface IRun
+    {
+        void Run();
+    }
+
+    interface ISwim
+    {
+        void Swim();
+    }
+
+    class Athlete : IRun, ISwim
+    {
+        public void Run()
+        {
+            Console.WriteLine("Athlete is running...");
+        }
+
+        public void Swim()
+        {
+            Console.WriteLine("Athlete is swimming...");
+        }
+    }
+
+    // 3. Multilevel Inheritance
+    class Vehicle
+    {
+        public void Start()
+        {
+            Console.WriteLine("Vehicle started...");
+        }
+    }
+
+    class Car : Vehicle
+    {
+        public void Drive()
+        {
+            Console.WriteLine("Car is being driven...");
+        }
+    }
+
+    class SportsCar : Car
+    {
+        public void Turbo()
+        {
+            Console.WriteLine("SportsCar turbo mode activated...");
+        }
+    }
+
+    // 4. Hierarchical Inheritance
+    class Shape
+    {
+        public void Display()
+        {
+            Console.WriteLine("This is a shape.");
+        }
+    }
+
+    class Circle : Shape
+    {
+        public void DrawCircle()
+        {
+            Console.WriteLine("Drawing a circle...");
+        }
+    }
+
+    class Rectangle : Shape
+    {
+        public void DrawRectangle()
+        {
+            Console.WriteLine("Drawing a rectangle...");
+        }
+    }
+
+    // Main Program
+    class Q5
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== Single Inheritance ===");
+            Dog d = new Dog();
+            d.Eat();
+            d.Bark();
+
+            Console.WriteLine("\n=== Multiple Inheritance (via Interfaces) ===");
+            Athlete a = new Athlete();
+            a.Run();
+            a.Swim();
+
+            Console.WriteLine("\n=== Multilevel Inheritance ===");
+            SportsCar sc = new SportsCar();
+            sc.Start();
+            sc.Drive();
+            sc.Turbo();
+
+            Console.WriteLine("\n=== Hierarchical Inheritance ===");
+            Circle c = new Circle();
+            c.Display();
+            c.DrawCircle();
+
+            Rectangle r = new Rectangle();
+            r.Display();
+            r.DrawRectangle();
+        }
+    }
+}

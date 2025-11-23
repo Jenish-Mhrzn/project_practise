@@ -1,0 +1,129 @@
+// 4.      
+// Write a program in C# Sharp to display the
+// characters and frequency of character from the string given by the user.
+
+using System;
+using System.Linq;
+
+namespace Lab.lab3
+{
+    internal class Q4
+    {
+        static void Main()
+        {
+            Console.Write("Enter a string: ");
+            string input = Console.ReadLine();
+
+            var frequency = input
+                .GroupBy(c => c)
+                .Select(group => new { Character = group.Key, Count = group.Count() });
+
+            Console.WriteLine("\nCharacter Frequencies:");
+            foreach (var item in frequency)
+            {
+                Console.WriteLine($"Character: {item.Character}, Frequency: {item.Count}");
+            }
+        }
+    }
+}
+
+
+// 5.      
+// Write a program in C# Sharp to find the string
+// which starts and ends with a specific character.
+// The cities are :
+// 'ROME','LONDON','NAIROBI','CALIFORNIA','ZURICH','NEWDELHI','AMSTERDAM','ABU
+// DHABI','PARIS'
+
+using System;
+using System.Collections.Generic;
+using System.IO.Ports;
+using System.Linq;
+
+namespace Lab.lab3
+{
+    internal class Q5
+    {
+        static void Main()
+        {
+            List<string> words = new List<string>
+            {
+                "ROME", "LONDON", "NAIROBI", "CALIFORNIA", "ZURICH", "NEWDELHI", "AMSTERDAM", "ABUDHABI", "PARIS","ANKARA","ABA"
+
+            };
+
+            Console.Write("Enter the character to match: ");
+            char ch = Console.ReadLine().ToLower()[0]; // Lowercase for case-insensitive check
+
+            var result = words
+                .Where(w => w.Length > 0 &&
+                            char.ToLower(w[0]) == ch &&
+                            char.ToLower(w[w.Length - 1]) == ch)
+                .ToList();
+
+            Console.WriteLine("\nWords that start and end with '" + ch + "':");
+            foreach (var word in result)
+            {
+                Console.WriteLine(word);
+            }
+        }
+    }
+}
+
+
+// 6.Write a program in C# Sharp for joining the two different
+// objects data using LINQ
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Lab.lab3_
+{
+    class Student    // <-- singular here
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    class Score
+    {
+        public int StudentId { get; set; }
+        public int Marks { get; set; }
+    }
+
+    internal class Q6
+    {
+        static void Main()
+        {
+            List<Student> students = new List<Student>    // <-- matches class name
+            {
+                new Student { Id = 1, Name = "Jenish" },
+                new Student { Id = 2, Name = "Jeni" },
+                new Student { Id = 3, Name = "Malik" }
+            };
+
+            List<Score> scores = new List<Score>
+            {
+                new Score { StudentId = 1, Marks = 90 },
+                new Score { StudentId = 2, Marks = 85 },
+                new Score { StudentId = 3, Marks = 75 }
+            };
+
+            var studentScores = students.Join(
+                scores,
+                student => student.Id,
+                score => score.StudentId,
+                (student, score) => new
+                {
+                    student.Name,
+                    score.Marks
+                });
+
+            foreach (var item in studentScores)
+            {
+                Console.WriteLine($"Student: {item.Name}, Marks: {item.Marks}");
+            }
+        }
+    }
+}
