@@ -1,3 +1,5 @@
+// Create a program to display the result from the database using database first technique.
+
 Install-Package EntityFramework
 
 using lab4Q2;
