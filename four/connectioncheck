@@ -1,0 +1,36 @@
+Install-Package System.Configuration.ConfigurationManager
+Install-Package EntityFramework
+
+<connectionStrings>
+		<add name="SqlServerConnection"
+			 connectionString="Server=localhost\SQLEXPRESS;Database=LAB4;Integrated Security=True;"
+			 providerName="System.Data.SqlClient" />
+	</connectionStrings>
+
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
+
+class ConnectCheck
+{
+    static void Main()
+    {
+        try
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                Console.WriteLine("✅ Connected to SQL Server Database!");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("❌ Connection Failed:");
+            Console.WriteLine(ex.Message);
+        }
+
+        Console.ReadLine();
+    }
+}

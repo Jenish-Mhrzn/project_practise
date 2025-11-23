@@ -1,0 +1,95 @@
+using System;
+using System.Configuration;
+using System.Data;
+using MySql.Data.MySqlClient;
+
+namespace lab.lab4
+{
+    class Q1
+    {
+        // read connection string from App.config
+        static string connectionStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Connected Architecture:");
+            ConnectedArchitecture();
+
+            Console.WriteLine("\nDisconnected Architecture:");
+            DisconnectedArchitecture();
+
+            Console.WriteLine("\nPress Enter to exit...");
+            Console.ReadLine();
+        }
+
+        static void ConnectedArchitecture()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionStr))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM students";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        // assumes columns "id" and "name"
+                        Console.WriteLine($"ID: {reader["id"]}, Name: {reader["name"]}");
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error (ConnectedArchitecture): " + ex.Message);
+                }
+            }
+        }
+
+        static void DisconnectedArchitecture()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionStr))
+            {
+                try
+                {
+                    string query = "SELECT * FROM students";
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Console.WriteLine($"ID: {row["id"]}, Name: {row["name"]}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error (DisconnectedArchitecture): " + ex.Message);
+                }
+            }
+        }
+    }
+}
+
+//Database
+
+-- 1️⃣ Create database
+CREATE DATABASE lab4Q2;
+USE lab4Q2;
+
+-- 2️⃣ Create students table
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- 3️⃣ Insert some sample data
+INSERT INTO students (name) VALUES ('Jenish');
+INSERT INTO students (name) VALUES ('Malik');
+INSERT INTO students (name) VALUES ('Sita');
+
+-- 4️⃣ Verify the table
+SELECT * FROM students;
